@@ -25,6 +25,7 @@ while True:
         (a, b, w, h) = cv2.boundingRect(x)
         cv2.rectangle(frame, (a, b), (a+w, b+h), (0, 255, 0), 3)
     stat_list.append(stat)
+    stat_list=stat_list[-2:]
     if stat_list[-1] ==  1 and stat_list[-2] == 0:
         times.append(datetime.now())
     if stat_list[-1] ==  0 and stat_list[-2] == 1:
@@ -42,7 +43,7 @@ while True:
     datetime.now()
 
 for j in range(0, len(times), 2):
-    df=df.append({"Start Time": times[j], "End Time": times[j+1]}, ignore_index=True)
-df.to_csv("resources\Times.csv")
+    df=df.append({"StartTime": times[j], "EndTime": times[j+1]}, ignore_index=True)
+df.to_csv("Times.csv")
 video.release()
 cv2.destroyAllWindows
